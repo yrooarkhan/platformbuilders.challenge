@@ -1,5 +1,6 @@
 package io.platformbuilders.challenge.infrastructure.web.builders;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 import java.time.LocalDateTime;
@@ -43,7 +44,7 @@ public class AutenticadorApiBuilders {
 		try {
 			HttpResponse<JsonNode> resposta = Unirest.post(AUTH_URL).body(configuracao).asJson();
 
-			if (UNAUTHORIZED.value() >= resposta.getStatus()) {
+			if (BAD_REQUEST.value() >= resposta.getStatus()) {
 				boolean naoAutorizado = UNAUTHORIZED.value() == resposta.getStatus();
 				throw naoAutorizado ? new AutenticacaoApiBuildersException() : new ComunicacaoApiBuildersException();
 			}
