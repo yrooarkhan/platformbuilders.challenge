@@ -1,10 +1,8 @@
-package io.platformbuilders.challenge.infrastructure.web.builders;
+package io.platformbuilders.challenge.infrastructure.web.platformbuilders.provider;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import io.platformbuilders.challenge.infrastructure.web.builders.ConfiguracaoApiBuilders;
 
 class ConfiguracaoApiBuildersTest {
 

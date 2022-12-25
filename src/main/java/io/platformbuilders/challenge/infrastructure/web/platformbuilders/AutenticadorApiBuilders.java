@@ -1,6 +1,6 @@
-package io.platformbuilders.challenge.infrastructure.web.builders;
+package io.platformbuilders.challenge.infrastructure.web.platformbuilders;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 import java.time.LocalDateTime;
@@ -9,11 +9,11 @@ import org.json.JSONObject;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import io.platformbuilders.challenge.infrastructure.exception.AutenticacaoApiBuildersException;
 import io.platformbuilders.challenge.infrastructure.exception.ComunicacaoApiBuildersException;
+import io.platformbuilders.challenge.infrastructure.web.platformbuilders.provider.AutenticadorApiBuildersProvider;
 
 public class AutenticadorApiBuilders {
 
@@ -21,13 +21,13 @@ public class AutenticadorApiBuilders {
 	private static final String CHAVE_DE_AUTENTICAO = "token";
 	private static final String EXPIRA_EM = "expires_in";
 
-	private ConfiguracaoApiBuilders configuracao;
+	private AutenticadorApiBuildersProvider provider;
 
 	private String chaveAutenticacao;
 	private LocalDateTime expiraEm;
 
-	public AutenticadorApiBuilders(ConfiguracaoApiBuilders configuracao) {
-		this.configuracao = configuracao;
+	public AutenticadorApiBuilders(AutenticadorApiBuildersProvider provider) {
+		this.provider = provider;
 	}
 
 	public String autentica() {
@@ -42,9 +42,9 @@ public class AutenticadorApiBuilders {
 
 	private HttpResponse<JsonNode> autenticaComBaseNaConfiguracao() {
 		try {
-			HttpResponse<JsonNode> resposta = Unirest.post(AUTH_URL).body(configuracao).asJson();
+			HttpResponse<JsonNode> resposta = provider.post(AUTH_URL).body(provider.getConfiguracao()).asJson();
 
-			if (BAD_REQUEST.value() >= resposta.getStatus()) {
+			if (CREATED.value() != resposta.getStatus()) {
 				boolean naoAutorizado = UNAUTHORIZED.value() == resposta.getStatus();
 				throw naoAutorizado ? new AutenticacaoApiBuildersException() : new ComunicacaoApiBuildersException();
 			}
@@ -56,7 +56,7 @@ public class AutenticadorApiBuilders {
 	}
 
 	private boolean chaveExpirou() {
-		LocalDateTime agora = LocalDateTime.now();
+		LocalDateTime agora = provider.now();
 		return agora.isAfter(expiraEm);
 	}
 

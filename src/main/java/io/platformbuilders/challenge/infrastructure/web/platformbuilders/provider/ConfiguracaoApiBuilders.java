@@ -1,4 +1,4 @@
-package io.platformbuilders.challenge.infrastructure.web.builders;
+package io.platformbuilders.challenge.infrastructure.web.platformbuilders.provider;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
