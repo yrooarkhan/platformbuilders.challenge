@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.platformbuilders.challenge.domain.model.CalculoJuros;
 import io.platformbuilders.challenge.domain.model.PagamentoBoleto;
 import io.platformbuilders.challenge.domain.usecase.BuildersPayUsecase;
-import io.platformbuilders.challenge.infrastructure.expected.BuildersPayException;
+import io.platformbuilders.challenge.infrastructure.exception.BuildersPayException;
 
 @RestController
 @RequestMapping("/api/v1/calculate-interests")

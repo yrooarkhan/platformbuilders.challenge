@@ -1,4 +1,4 @@
-package io.platformbuilders.challenge.infrastructure.expected;
+package io.platformbuilders.challenge.infrastructure.exception;
 
 import org.springframework.http.HttpStatusCode;
 

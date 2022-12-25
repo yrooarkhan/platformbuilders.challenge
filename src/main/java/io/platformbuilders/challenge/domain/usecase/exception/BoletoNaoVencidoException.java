@@ -2,7 +2,7 @@ package io.platformbuilders.challenge.domain.usecase.exception;
 
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
-import io.platformbuilders.challenge.infrastructure.expected.BuildersPayException;
+import io.platformbuilders.challenge.infrastructure.exception.BuildersPayException;
 
 public class BoletoNaoVencidoException extends BuildersPayException {
 

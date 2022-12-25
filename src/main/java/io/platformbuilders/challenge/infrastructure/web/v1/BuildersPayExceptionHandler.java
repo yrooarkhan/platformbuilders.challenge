@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import io.platformbuilders.challenge.domain.model.FalhaProcessamento;
-import io.platformbuilders.challenge.infrastructure.expected.BuildersPayException;
+import io.platformbuilders.challenge.infrastructure.exception.BuildersPayException;
 
 @ControllerAdvice(basePackageClasses = BuildersPayController.class)
 public class BuildersPayExceptionHandler {
