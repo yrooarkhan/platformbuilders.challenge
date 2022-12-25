@@ -33,12 +33,14 @@ import io.platformbuilders.challenge.domain.model.CalculoJuros;
 import io.platformbuilders.challenge.domain.model.PagamentoBoleto;
 import io.platformbuilders.challenge.domain.usecase.BuildersPayUsecase;
 import io.platformbuilders.challenge.domain.usecase.exception.BoletoNaoVencidoException;
+import io.platformbuilders.challenge.domain.usecase.exception.CodigoBoletoInvalidoException;
 import io.platformbuilders.challenge.domain.usecase.exception.TipoBoletoDiferenteNpcException;
 import io.platformbuilders.challenge.infrastructure.LocalDateAdapter;
+import io.platformbuilders.challenge.infrastructure.web.WebAppContextTest;
 
 @WebAppConfiguration
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = { WebAppContext.class, BuildersPayExceptionHandler.class })
+@ContextConfiguration(classes = { WebAppContextTest.class })
 class BuildersPayControllerTest {
 
 	private static final Double MULTA_CALCULADA = 2d;
@@ -50,6 +52,7 @@ class BuildersPayControllerTest {
 	private static final String DESCRIPTION = "$.description";
 	private static final String ERRO_BOLETO_NAO_NPC = "O código de boleto informado não pertence a um boleto do tipo NPC.";
 	private static final String ERRO_BOLETO_NAO_VENCIDO = "O código de boleto informado não pertence a um boleto vencido.";
+	private static final String ERRO_BOLETO_INVALIDO = "O código de boleto informado não pertence nenhum boleto da nossa base de dados.";
 	private static final String URI = "/api/v1/calculate-interests";
 
 	private static final LocalDate DATA_VENCIMENTO = LocalDate.of(2022, Month.DECEMBER, 23);
@@ -100,7 +103,7 @@ class BuildersPayControllerTest {
 
 	@Test
 	void deveEstourarErro_casoCodigoDoBoletoForInvalido_quandoCalculandoJurosAtravesDaAPI() throws Exception {
-		doThrow(new BoletoNaoVencidoException()).when(usecase).calculaJurosBoleto(any(PagamentoBoleto.class));
+		doThrow(new CodigoBoletoInvalidoException()).when(usecase).calculaJurosBoleto(any(PagamentoBoleto.class));
 
 		PagamentoBoleto pagamentoBoleto = mockPagamentoBoleto();
 		String pagamentoBoletoJson = gson.toJson(pagamentoBoleto);
@@ -108,7 +111,7 @@ class BuildersPayControllerTest {
 
 		ResultActions entidadeNaoProcessavel = resultado.andExpect(status().isUnprocessableEntity());
 		entidadeNaoProcessavel.andExpect(jsonPath(ERROR, Matchers.equalTo(UNPROCESSABLE_ENTITY.value())));
-		entidadeNaoProcessavel.andExpect(jsonPath(DESCRIPTION, Matchers.equalTo(ERRO_BOLETO_NAO_VENCIDO)));
+		entidadeNaoProcessavel.andExpect(jsonPath(DESCRIPTION, Matchers.equalTo(ERRO_BOLETO_INVALIDO)));
 	}
 
 	@Test

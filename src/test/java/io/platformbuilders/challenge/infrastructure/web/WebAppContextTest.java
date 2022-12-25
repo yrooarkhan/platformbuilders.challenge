@@ -1,4 +1,4 @@
-package io.platformbuilders.challenge.infrastructure.web.v1;
+package io.platformbuilders.challenge.infrastructure.web;
 
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
@@ -8,11 +8,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import io.platformbuilders.challenge.domain.usecase.BuildersPayUsecase;
+import io.platformbuilders.challenge.infrastructure.web.v1.BuildersPayController;
+import io.platformbuilders.challenge.infrastructure.web.v1.BuildersPayExceptionHandler;
 
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = "io.platformbuilders.challenge")
-public class WebAppContext implements WebMvcConfigurer {
+public class WebAppContextTest implements WebMvcConfigurer {
 
 	@Bean
 	public BuildersPayController buildersPayController() {
@@ -25,7 +27,7 @@ public class WebAppContext implements WebMvcConfigurer {
 	}
 
 	@Bean
-	public BuildersPayUsecase buildersPayUsecase() {
+	public BuildersPayUsecase usecase() {
 		return Mockito.mock(BuildersPayUsecase.class);
 	}
 
