@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.platformbuilders.challenge.domain.model.CalculoJuros;
+import io.platformbuilders.challenge.domain.model.ResumoCalculoJuros;
 import io.platformbuilders.challenge.domain.model.PagamentoBoleto;
 import io.platformbuilders.challenge.domain.usecase.BuildersPayUsecase;
-import io.platformbuilders.challenge.infrastructure.exception.BuildersPayException;
+import io.platformbuilders.challenge.infrastructure.exception.template.BoletoException;
 
 @RestController
 @RequestMapping("/api/v1/calculate-interests")
@@ -23,9 +23,9 @@ public class BuildersPayController {
 
 	@PostMapping
 	@ResponseBody
-	public ResponseEntity<CalculoJuros> calculaJurosBoleto(@RequestBody PagamentoBoleto pagamentoBoleto)
-			throws BuildersPayException {
-		CalculoJuros jurosBoleto = usecase.calculaJurosBoleto(pagamentoBoleto);
+	public ResponseEntity<ResumoCalculoJuros> calculaJurosBoleto(@RequestBody PagamentoBoleto pagamentoBoleto)
+			throws BoletoException {
+		ResumoCalculoJuros jurosBoleto = usecase.calculaJurosBoleto(pagamentoBoleto);
 		return new ResponseEntity<>(jurosBoleto, HttpStatus.CREATED);
 	}
 

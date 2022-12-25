@@ -1,18 +1,19 @@
-package io.platformbuilders.challenge.infrastructure.exception;
+package io.platformbuilders.challenge.infrastructure.exception.template;
 
 import org.springframework.http.HttpStatusCode;
 
-public abstract class BuildersPayException extends Exception {
+public abstract class BoletoException extends Exception implements ErroConhecido {
 
 	private static final long serialVersionUID = -8467687632367919878L;
 
 	private final HttpStatusCode statusHttp;
 
-	protected BuildersPayException(HttpStatusCode statusHttp, String descricaoErro) {
+	protected BoletoException(HttpStatusCode statusHttp, String descricaoErro) {
 		super(descricaoErro);
 		this.statusHttp = statusHttp;
 	}
 
+	@Override
 	public HttpStatusCode getStatusHttp() {
 		return statusHttp;
 	}

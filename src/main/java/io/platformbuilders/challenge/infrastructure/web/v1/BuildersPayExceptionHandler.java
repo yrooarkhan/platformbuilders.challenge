@@ -7,15 +7,17 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import io.platformbuilders.challenge.domain.model.FalhaProcessamento;
-import io.platformbuilders.challenge.infrastructure.exception.BuildersPayException;
+import io.platformbuilders.challenge.infrastructure.exception.template.ApiBuildersException;
+import io.platformbuilders.challenge.infrastructure.exception.template.BoletoException;
+import io.platformbuilders.challenge.infrastructure.exception.template.ErroConhecido;
 
 @ControllerAdvice(basePackageClasses = BuildersPayController.class)
 public class BuildersPayExceptionHandler {
 
 	private static final String ERRO_INESPERADO = "Um erro inesperado ocorreu. Por favor, tente novamente. Se o erro persistir, entre em contato com nosso suporte.";
 
-	@ExceptionHandler(BuildersPayException.class)
-	public ResponseEntity<FalhaProcessamento> trataErrosConhecidos(BuildersPayException excecao) {
+	@ExceptionHandler({ BoletoException.class, ApiBuildersException.class })
+	public ResponseEntity<FalhaProcessamento> trataErrosConhecidos(ErroConhecido excecao) {
 		FalhaProcessamento falhaCalculo = new FalhaProcessamento(excecao.getStatusHttp(), excecao.getMessage());
 		return new ResponseEntity<>(falhaCalculo, excecao.getStatusHttp());
 	}

@@ -1,4 +1,6 @@
-package io.platformbuilders.challenge.infrastructure.web;
+package io.platformbuilders.challenge.infrastructure.web.builders;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ConfiguracaoApiBuilders {
 
@@ -6,7 +8,10 @@ public class ConfiguracaoApiBuilders {
 	private static final String CLIENT_SECRET = "clientSecret";
 	private static final String ERRO_IMPOSSIVEL_INSTANCIAR = "Não foi possível instanciar a classe ConfiguracaoApiBuilders, pois as propriedades \"clientId\" ou \"clientSecret\" não foram definidas nas propriedades do sistema.";
 
+	@JsonProperty("client_id")
 	private String clientId;
+
+	@JsonProperty("client_secret")
 	private String clientSecret;
 
 	public ConfiguracaoApiBuilders() {

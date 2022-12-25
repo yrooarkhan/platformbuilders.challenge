@@ -2,9 +2,9 @@ package io.platformbuilders.challenge.domain.usecase.exception;
 
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
-import io.platformbuilders.challenge.infrastructure.exception.BuildersPayException;
+import io.platformbuilders.challenge.infrastructure.exception.template.BoletoException;
 
-public class TipoBoletoDiferenteNpcException extends BuildersPayException {
+public class TipoBoletoDiferenteNpcException extends BoletoException {
 
 	private static final long serialVersionUID = -315185706296497654L;
 

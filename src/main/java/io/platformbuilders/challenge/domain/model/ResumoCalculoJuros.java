@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CalculoJuros {
+public class ResumoCalculoJuros {
 
 	@JsonProperty("original_amount")
 	private Double valorOriginal;

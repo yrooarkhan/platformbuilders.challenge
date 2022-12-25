@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import io.platformbuilders.challenge.domain.model.FalhaProcessamento;
-import io.platformbuilders.challenge.infrastructure.exception.BuildersPayException;
+import io.platformbuilders.challenge.infrastructure.exception.template.BoletoException;
 
 class BuildersPayExceptionHandlerTest {
 
@@ -25,7 +25,7 @@ class BuildersPayExceptionHandlerTest {
 
 	@Test
 	void deveExibirMensagemDoErro_casoSejaUmaInstanciaDeBuildersPayException_quandoTratandoErrosConhecidos() {
-		BuildersPayException excecao = Mockito.mock(BuildersPayException.class);
+		BoletoException excecao = Mockito.mock(BoletoException.class);
 		Mockito.doReturn(UNPROCESSABLE_ENTITY).when(excecao).getStatusHttp();
 		Mockito.doReturn(ERRO_CONHECIDO).when(excecao).getMessage();
 

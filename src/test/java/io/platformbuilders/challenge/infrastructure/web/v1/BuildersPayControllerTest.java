@@ -29,7 +29,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import io.platformbuilders.challenge.domain.model.CalculoJuros;
+import io.platformbuilders.challenge.domain.model.ResumoCalculoJuros;
 import io.platformbuilders.challenge.domain.model.PagamentoBoleto;
 import io.platformbuilders.challenge.domain.usecase.BuildersPayUsecase;
 import io.platformbuilders.challenge.domain.usecase.exception.BoletoNaoVencidoException;
@@ -131,8 +131,8 @@ class BuildersPayControllerTest {
 		entidadeNaoProcessavel.andExpect(jsonPath("$.fine_amount_calculated", Matchers.equalTo(MULTA_CALCULADA)));
 	}
 
-	private CalculoJuros mockCalculoJuros() {
-		CalculoJuros calculoJuros = new CalculoJuros();
+	private ResumoCalculoJuros mockCalculoJuros() {
+		ResumoCalculoJuros calculoJuros = new ResumoCalculoJuros();
 		calculoJuros.setValorOriginal(VALOR_ORIGINAL);
 		calculoJuros.setValor(VALOR_JUROS);
 		calculoJuros.setDataVencimento(DATA_VENCIMENTO);
