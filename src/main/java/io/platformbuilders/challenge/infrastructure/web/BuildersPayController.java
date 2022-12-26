@@ -1,4 +1,4 @@
-package io.platformbuilders.challenge.infrastructure.web.v1;
+package io.platformbuilders.challenge.infrastructure.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

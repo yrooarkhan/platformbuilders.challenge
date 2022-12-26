@@ -1,4 +1,4 @@
-package io.platformbuilders.challenge.infrastructure.web.platformbuilders.provider;
+package io.platformbuilders.challenge.infrastructure.web.builders.provider;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

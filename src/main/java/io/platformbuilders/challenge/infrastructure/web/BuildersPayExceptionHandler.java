@@ -1,4 +1,4 @@
-package io.platformbuilders.challenge.infrastructure.web.v1;
+package io.platformbuilders.challenge.infrastructure.web;
 
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 

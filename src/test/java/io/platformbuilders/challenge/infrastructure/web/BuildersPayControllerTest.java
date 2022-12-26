@@ -1,4 +1,4 @@
-package io.platformbuilders.challenge.infrastructure.web.v1;
+package io.platformbuilders.challenge.infrastructure.web;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
@@ -36,7 +36,6 @@ import io.platformbuilders.challenge.domain.usecase.exception.BoletoNaoVencidoEx
 import io.platformbuilders.challenge.domain.usecase.exception.CodigoBoletoInvalidoException;
 import io.platformbuilders.challenge.domain.usecase.exception.TipoBoletoDiferenteNpcException;
 import io.platformbuilders.challenge.infrastructure.LocalDateAdapter;
-import io.platformbuilders.challenge.infrastructure.web.WebAppContextTest;
 
 @WebAppConfiguration
 @ExtendWith(SpringExtension.class)

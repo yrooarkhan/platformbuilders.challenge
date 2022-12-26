@@ -1,7 +1,10 @@
-package io.platformbuilders.challenge.infrastructure.web.platformbuilders.provider;
+package io.platformbuilders.challenge.infrastructure.web.builders.provider;
+
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@Component
 public class ConfiguracaoApiBuilders {
 
 	private static final String CLIENT_ID = "clientId";

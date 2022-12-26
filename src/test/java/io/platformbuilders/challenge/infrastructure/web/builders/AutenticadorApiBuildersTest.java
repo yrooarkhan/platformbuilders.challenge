@@ -1,8 +1,7 @@
-package io.platformbuilders.challenge.infrastructure.web.platformbuilders;
+package io.platformbuilders.challenge.infrastructure.web.builders;
 
 import static java.time.LocalDateTime.of;
 import static java.time.Month.DECEMBER;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 
@@ -25,8 +24,7 @@ import com.mashape.unirest.request.body.RequestBodyEntity;
 
 import io.platformbuilders.challenge.infrastructure.exception.AutenticacaoApiBuildersException;
 import io.platformbuilders.challenge.infrastructure.exception.ComunicacaoApiBuildersException;
-import io.platformbuilders.challenge.infrastructure.web.platformbuilders.provider.AutenticadorApiBuildersProvider;
-import io.platformbuilders.challenge.infrastructure.web.platformbuilders.provider.ConfiguracaoApiBuilders;
+import io.platformbuilders.challenge.infrastructure.web.builders.provider.AutenticadorApiBuildersProvider;
 
 class AutenticadorApiBuildersTest {
 
@@ -34,6 +32,7 @@ class AutenticadorApiBuildersTest {
 	private static final int CINQUENTA_MIN = 50;
 	private static final int CINQUENTA_SEIS_MIN = 55;
 
+	private static final String STRING_VAZIA = "";
 	private static final String CHAVE_AUTENTICACAO_01 = "8cd6e6f5-f5e6-48ed-8c55-934a2a1e38d9";
 	private static final String CHAVE_AUTENTICACAO_02 = "0e482695-1c8c-43f3-9ab9-799702ac92d6";
 	private static final String RESPOSTA_01 = "{ 'token': '8cd6e6f5-f5e6-48ed-8c55-934a2a1e38d9', 'expires_in': '2022-12-25T18:53:00.372102' }";
@@ -47,9 +46,8 @@ class AutenticadorApiBuildersTest {
 
 	@BeforeEach
 	void instanciaAutenticadorComMocks() {
-		ConfiguracaoApiBuilders configuracao = Mockito.mock(ConfiguracaoApiBuilders.class);
 		this.autenticadorProvider = Mockito.mock(AutenticadorApiBuildersProvider.class);
-		Mockito.doReturn(configuracao).when(autenticadorProvider).getConfiguracao();
+		Mockito.doReturn(STRING_VAZIA).when(autenticadorProvider).getConfiguracao();
 
 		this.autenticador = new AutenticadorApiBuilders(autenticadorProvider);
 	}
@@ -116,7 +114,8 @@ class AutenticadorApiBuildersTest {
 		Mockito.doThrow(UnirestException.class).when(bodyEntity).asJson();
 
 		HttpRequestWithBody requestWithBody = Mockito.mock(HttpRequestWithBody.class);
-		Mockito.doReturn(bodyEntity).when(requestWithBody).body(any(Object.class));
+		Mockito.doReturn(requestWithBody).when(requestWithBody).header(anyString(), anyString());
+		Mockito.doReturn(bodyEntity).when(requestWithBody).body(anyString());
 
 		Mockito.doReturn(requestWithBody).when(autenticadorProvider).post(anyString());
 
@@ -136,7 +135,8 @@ class AutenticadorApiBuildersTest {
 		Mockito.doReturn(reponse).when(bodyEntity).asJson();
 
 		HttpRequestWithBody requestWithBody = Mockito.mock(HttpRequestWithBody.class);
-		Mockito.doReturn(bodyEntity).when(requestWithBody).body(any(Object.class));
+		Mockito.doReturn(requestWithBody).when(requestWithBody).header(anyString(), anyString());
+		Mockito.doReturn(bodyEntity).when(requestWithBody).body(anyString());
 
 		Mockito.doReturn(requestWithBody).when(autenticadorProvider).post(anyString());
 

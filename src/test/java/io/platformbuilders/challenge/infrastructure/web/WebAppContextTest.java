@@ -8,8 +8,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import io.platformbuilders.challenge.domain.usecase.BuildersPayUsecase;
-import io.platformbuilders.challenge.infrastructure.web.v1.BuildersPayController;
-import io.platformbuilders.challenge.infrastructure.web.v1.BuildersPayExceptionHandler;
+import io.platformbuilders.challenge.infrastructure.web.builders.AutenticadorApiBuilders;
+import io.platformbuilders.challenge.infrastructure.web.builders.provider.AutenticadorApiBuildersProvider;
+import io.platformbuilders.challenge.infrastructure.web.builders.provider.ConfiguracaoApiBuilders;
 
 @EnableWebMvc
 @Configuration
@@ -29,6 +30,21 @@ public class WebAppContextTest implements WebMvcConfigurer {
 	@Bean
 	public BuildersPayUsecase usecase() {
 		return Mockito.mock(BuildersPayUsecase.class);
+	}
+
+	@Bean
+	public AutenticadorApiBuilders autenticadorApiBuilders() {
+		return Mockito.mock(AutenticadorApiBuilders.class);
+	}
+
+	@Bean
+	public ConfiguracaoApiBuilders configuracaoApiBuilders() {
+		return Mockito.mock(ConfiguracaoApiBuilders.class);
+	}
+
+	@Bean
+	public AutenticadorApiBuildersProvider autenticadorApiBuildersProvider() {
+		return Mockito.mock(AutenticadorApiBuildersProvider.class);
 	}
 
 }
