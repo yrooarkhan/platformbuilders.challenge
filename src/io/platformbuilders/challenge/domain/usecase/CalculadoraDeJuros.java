@@ -51,7 +51,7 @@ public class CalculadoraDeJuros {
 		double multa = boleto.getValor() * MULTA_ATRASO;
 
 		resumo.setValorComJuros(boleto.getValor() + juros + multa);
-		resumo.setQuantidadeJurosCalculada(valor);
+		resumo.setQuantidadeJurosCalculada(juros);
 		resumo.setQuantidadeMultaCalculada(multa);
 
 		return resumo;

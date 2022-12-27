@@ -3,22 +3,12 @@ package io.platformbuilders.challenge.infrastructure.persistance;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.CreationTimestamp;
-
 import io.platformbuilders.challenge.domain.model.ResumoCalculoJuros;
 
-@Entity
-@Table(name = "interest_calculation_history")
 public class HistoricoCalculoJuros {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private Double valorOriginal;
@@ -29,7 +19,7 @@ public class HistoricoCalculoJuros {
 	private LocalDate dataVencimento;
 	private LocalDate dataPagamento;
 
-	@CreationTimestamp
+//	@CreationTimestamp
 	private LocalDateTime dataDoCalculo;
 
 	public HistoricoCalculoJuros(ResumoCalculoJuros resumoCalculo) {

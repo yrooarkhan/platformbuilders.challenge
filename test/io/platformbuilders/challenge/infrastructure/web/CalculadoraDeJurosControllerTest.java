@@ -37,6 +37,7 @@ import io.platformbuilders.challenge.domain.usecase.CalculadoraDeJuros;
 import io.platformbuilders.challenge.domain.usecase.exception.BoletoNaoVencidoException;
 import io.platformbuilders.challenge.domain.usecase.exception.CodigoBoletoInvalidoException;
 import io.platformbuilders.challenge.domain.usecase.exception.TipoBoletoDiferenteNpcException;
+import io.platformbuilders.challenge.infrastructure.WebAppContextTest;
 import io.platformbuilders.challenge.infrastructure.adapters.AdaptadorDeLocalDate;
 
 @WebAppConfiguration

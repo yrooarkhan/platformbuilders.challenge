@@ -1,4 +1,4 @@
-package io.platformbuilders.challenge.infrastructure.web;
+package io.platformbuilders.challenge.infrastructure;
 
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import io.platformbuilders.challenge.domain.usecase.CalculadoraDeJuros;
 import io.platformbuilders.challenge.infrastructure.persistance.HistoricoCalculoJuros;
-import io.platformbuilders.challenge.infrastructure.persistance.PersistidorDeHistoricoDeCalculo;
+import io.platformbuilders.challenge.infrastructure.web.CalculadoraDeJurosController;
+import io.platformbuilders.challenge.infrastructure.web.CalculadoraDeJurosExceptionHandler;
 import io.platformbuilders.challenge.infrastructure.web.builders.Autenticador;
 import io.platformbuilders.challenge.infrastructure.web.builders.RecuperadorBoletos;
 import io.platformbuilders.challenge.infrastructure.web.builders.provider.BuildersApiProvider;
@@ -53,11 +54,6 @@ public class WebAppContextTest implements WebMvcConfigurer {
 	@Bean
 	public RecuperadorBoletos recuperadorBoletos() {
 		return Mockito.mock(RecuperadorBoletos.class);
-	}
-
-	@Bean
-	public PersistidorDeHistoricoDeCalculo persistidorDeHistoricoDeCalculo() {
-		return Mockito.mock(PersistidorDeHistoricoDeCalculo.class);
 	}
 
 	@Bean

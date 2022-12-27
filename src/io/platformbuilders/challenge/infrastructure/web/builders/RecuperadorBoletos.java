@@ -1,7 +1,8 @@
 package io.platformbuilders.challenge.infrastructure.web.builders;
 
+import static org.springframework.http.HttpStatus.OK;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import com.mashape.unirest.http.HttpResponse;
@@ -36,7 +37,7 @@ public class RecuperadorBoletos {
 			JsonNode corpoEnvio = new JsonNode(formataParaEnvio(codigoBoleto));
 			HttpResponse<Boleto> resposta = montaRequisicaoComCorpo().body(corpoEnvio).asObject(Boleto.class);
 
-			if (HttpStatus.CREATED.value() != resposta.getStatus()) {
+			if (OK.value() != resposta.getStatus()) {
 				throw new CodigoBoletoInvalidoException();
 			}
 

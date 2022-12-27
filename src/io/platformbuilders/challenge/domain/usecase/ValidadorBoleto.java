@@ -22,7 +22,8 @@ public class ValidadorBoleto {
 
 	private void validaDataPagamento(PagamentoBoleto pagamentoBoleto, Boleto boleto) throws BoletoNaoVencidoException {
 		LocalDate dataPagamentoBoleto = pagamentoBoleto.getDataPagamento();
-		if (dataPagamentoBoleto.isAfter(boleto.getDataVencimento())) {
+		LocalDate dataVencimento = boleto.getDataVencimento();
+		if (dataPagamentoBoleto.isBefore(dataVencimento) || dataPagamentoBoleto.isEqual(dataVencimento)) {
 			throw new BoletoNaoVencidoException();
 		}
 	}

@@ -25,8 +25,8 @@ public class CalculadoraDeJurosController {
 	@ResponseBody
 	public ResponseEntity<ResumoCalculoJuros> calculaJurosBoleto(@RequestBody PagamentoBoleto pagamentoBoleto)
 			throws CalculadoraException {
-		ResumoCalculoJuros jurosBoleto = usecase.calculaJurosBoleto(pagamentoBoleto);
-		return new ResponseEntity<>(jurosBoleto, HttpStatus.CREATED);
+		ResumoCalculoJuros resumoJuros = usecase.calculaJurosBoleto(pagamentoBoleto);
+		return new ResponseEntity<>(resumoJuros, HttpStatus.OK);
 	}
 
 }
