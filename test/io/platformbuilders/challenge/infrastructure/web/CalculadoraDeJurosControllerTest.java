@@ -125,7 +125,7 @@ class CalculadoraDeJurosControllerTest {
 		String pagamentoBoletoJson = gson.toJson(pagamentoBoleto);
 		ResultActions resultado = mockMvc.perform(post(URI).contentType(APPLICATION_JSON).content(pagamentoBoletoJson));
 
-		ResultActions entidadeNaoProcessavel = resultado.andExpect(status().isCreated());
+		ResultActions entidadeNaoProcessavel = resultado.andExpect(status().isOk());
 		entidadeNaoProcessavel.andExpect(jsonPath("$.original_amount", Matchers.equalTo(VALOR_ORIGINAL)));
 		entidadeNaoProcessavel.andExpect(jsonPath("$.amount", Matchers.equalTo(VALOR_JUROS)));
 		entidadeNaoProcessavel.andExpect(jsonPath("$.due_date", Matchers.equalTo(DATA_VENCIMENTO.toString())));
