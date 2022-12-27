@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import io.platformbuilders.challenge.infrastructure.web.builders.provider.Configuracao;
-
 class ConfiguracaoTest {
 
 	private static final String MENSAGEM_EXCECAO = "Não foi possível instanciar a classe ConfiguracaoApiBuilders, pois as propriedades \"clientId\" ou \"clientSecret\" não foram definidas nas propriedades do sistema.";

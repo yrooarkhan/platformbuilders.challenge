@@ -26,13 +26,13 @@ public class CalculadoraDeJurosExceptionHandler {
 	}
 
 	@ExceptionHandler(HttpMessageNotReadableException.class)
-	public ResponseEntity<FalhaProcessamento> trataErrosDesconhecidos(HttpMessageNotReadableException excecao) {
+	public ResponseEntity<FalhaProcessamento> trataErrosDeOrigemDesconhecida(HttpMessageNotReadableException excecao) {
 		FalhaProcessamento falhaProcessamento = new FalhaProcessamento(BAD_REQUEST, FORMATO_INVALIDO);
 		return new ResponseEntity<>(falhaProcessamento, BAD_REQUEST);
 	}
 
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<FalhaProcessamento> trataErrosDesconhecidos(Exception excecao) {
+	public ResponseEntity<FalhaProcessamento> trataErrosDeOrigemDesconhecida(Exception excecao) {
 		FalhaProcessamento falhaProcessamento = new FalhaProcessamento(INTERNAL_SERVER_ERROR, ERRO_INESPERADO);
 		return new ResponseEntity<>(falhaProcessamento, INTERNAL_SERVER_ERROR);
 	}

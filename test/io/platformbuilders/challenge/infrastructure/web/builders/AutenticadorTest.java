@@ -118,7 +118,6 @@ class AutenticadorTest {
 		Mockito.doReturn(bodyEntity).when(requestWithBody).body(anyString());
 
 		Mockito.doReturn(requestWithBody).when(autenticadorProvider).post(anyString());
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -139,7 +138,6 @@ class AutenticadorTest {
 		Mockito.doReturn(bodyEntity).when(requestWithBody).body(anyString());
 
 		Mockito.doReturn(requestWithBody).when(autenticadorProvider).post(anyString());
-
 	}
 
 }

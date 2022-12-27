@@ -19,7 +19,6 @@ public class GsonObjectMapper implements ObjectMapper {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setFieldNamingStrategy(serializador).registerTypeAdapter(LocalDate.class, adaptadorLocalDate);
 		this.gson = gsonBuilder.create();
-
 	}
 
 	@Override

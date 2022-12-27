@@ -2,6 +2,9 @@ package io.platformbuilders.challenge.infrastructure.web.builders;
 
 import static org.springframework.http.HttpStatus.OK;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,8 +22,8 @@ import io.platformbuilders.challenge.infrastructure.web.builders.provider.Builde
 public class RecuperadorBoletos {
 
 	private static final String AUTHORIZATION = "Authorization";
-	private static final String JSON = "application/json";
-	private static final String CONTENT = "Content-Type";
+	private static final String APPLICATION_JSON = "application/json";
+	private static final String CONTENT_TYPE = "Content-Type";
 	private static final String BUILDERS_URL = "https://vagas.builders/api/builders/bill-payments/codes";
 
 	private Autenticador autenticador;
@@ -48,7 +51,10 @@ public class RecuperadorBoletos {
 	}
 
 	private HttpRequestWithBody montaRequisicaoComCorpo() {
-		return provider.post(BUILDERS_URL).header(CONTENT, JSON).header(AUTHORIZATION, autenticador.autentica());
+		Map<String, String> headers = new HashMap<>();
+		headers.put(CONTENT_TYPE, APPLICATION_JSON);
+		headers.put(AUTHORIZATION, autenticador.autentica());
+		return provider.post(BUILDERS_URL).headers(headers);
 	}
 
 	private String formataParaEnvio(String codigoBoleto) {
