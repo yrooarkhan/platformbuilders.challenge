@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.anyString;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -34,7 +35,7 @@ class RecuperadorBoletosTest {
 	private static final String DOCUMENTO_DESTINATARIO = RandomStringUtils.randomNumeric(15);
 	private static final String NOME_DESTINATARIO = "Microhouse Informática S/C Ltda";
 	private static final String TIPO_BOLETO = "NPC";
-	private static final Double VALOR_BOLETO = 260.0;
+	private static final BigDecimal VALOR_BOLETO = BigDecimal.valueOf(260.0);
 
 	static private RecuperadorBoletos recuperador;
 

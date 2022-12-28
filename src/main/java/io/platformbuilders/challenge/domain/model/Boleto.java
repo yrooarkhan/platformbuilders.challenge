@@ -1,5 +1,6 @@
 package io.platformbuilders.challenge.domain.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,7 +16,7 @@ public class Boleto {
 	private LocalDate dataVencimento;
 
 	@JsonProperty("amount")
-	private Double valor;
+	private BigDecimal valor;
 
 	@JsonProperty("recipient_name")
 	private String nomeDestinatario;
@@ -42,11 +43,11 @@ public class Boleto {
 		this.dataVencimento = dataVencimento;
 	}
 
-	public Double getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(Double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 

@@ -1,23 +1,19 @@
-package io.platformbuilders.challenge.infrastructure;
+package io.platformbuilders.challenge.infrastructure.web;
 
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import io.platformbuilders.challenge.domain.usecase.CalculadoraDeJuros;
 import io.platformbuilders.challenge.infrastructure.persistance.HistoricoCalculoJuros;
-import io.platformbuilders.challenge.infrastructure.web.CalculadoraDeJurosController;
-import io.platformbuilders.challenge.infrastructure.web.CalculadoraDeJurosExceptionHandler;
 import io.platformbuilders.challenge.infrastructure.web.builders.Autenticador;
 import io.platformbuilders.challenge.infrastructure.web.builders.RecuperadorBoletos;
 import io.platformbuilders.challenge.infrastructure.web.builders.provider.BuildersApiProvider;
 import io.platformbuilders.challenge.infrastructure.web.builders.provider.Configuracao;
 
 @EnableWebMvc
-@Configuration
 @ComponentScan(basePackages = "io.platformbuilders.challenge")
 public class WebAppContextTest implements WebMvcConfigurer {
 

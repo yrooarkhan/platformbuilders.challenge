@@ -3,12 +3,21 @@ package io.platformbuilders.challenge.infrastructure.persistance;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import io.platformbuilders.challenge.domain.model.ResumoCalculoJuros;
+import org.hibernate.annotations.CreationTimestamp;
 
+import io.platformbuilders.challenge.domain.model.ResumoCalculoJuros;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "interest_calculation_history")
 public class HistoricoCalculoJuros {
 
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private Double valorOriginal;
@@ -19,14 +28,16 @@ public class HistoricoCalculoJuros {
 	private LocalDate dataVencimento;
 	private LocalDate dataPagamento;
 
-//	@CreationTimestamp
+	@CreationTimestamp
 	private LocalDateTime dataDoCalculo;
+	
+	public HistoricoCalculoJuros() {}
 
 	public HistoricoCalculoJuros(ResumoCalculoJuros resumoCalculo) {
-		this.valorOriginal = resumoCalculo.getValorOriginal();
-		this.valorComJuros = resumoCalculo.getValorComJuros();
-		this.percentualJuros = resumoCalculo.getQuantidadeJurosCalculada();
-		this.percentualMulta = resumoCalculo.getQuantidadeMultaCalculada();
+		this.valorOriginal = resumoCalculo.getValorOriginal().doubleValue();
+		this.valorComJuros = resumoCalculo.getValorComJuros().doubleValue();
+		this.percentualJuros = resumoCalculo.getQuantidadeJurosCalculada().doubleValue();
+		this.percentualMulta = resumoCalculo.getQuantidadeMultaCalculada().doubleValue();
 		this.dataVencimento = resumoCalculo.getDataVencimento();
 		this.dataPagamento = resumoCalculo.getDataPagamento();
 	}

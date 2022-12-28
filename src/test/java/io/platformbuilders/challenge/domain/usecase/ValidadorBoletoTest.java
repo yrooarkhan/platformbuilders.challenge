@@ -1,5 +1,6 @@
 package io.platformbuilders.challenge.domain.usecase;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -19,7 +20,7 @@ class ValidadorBoletoTest {
 	private static final String CODIGO_BOLETO = RandomStringUtils.randomNumeric(45);
 	private static final String DOCUMENTO_DESTINATARIO = RandomStringUtils.randomNumeric(15);
 	private static final String NOME_DESTINATARIO = "Microhouse Informática S/C Ltda";
-	private static final Double VALOR_BOLETO = 260.0;
+	private static final BigDecimal VALOR_BOLETO = BigDecimal.valueOf(260);
 	private static final LocalDate DATA_VENCIMENTO = LocalDate.of(2022, Month.DECEMBER, 27);
 
 	private static ValidadorBoleto validador;

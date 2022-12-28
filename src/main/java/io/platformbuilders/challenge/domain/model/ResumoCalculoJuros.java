@@ -1,5 +1,6 @@
 package io.platformbuilders.challenge.domain.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -8,10 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ResumoCalculoJuros {
 
 	@JsonProperty("original_amount")
-	private Double valorOriginal;
+	private BigDecimal valorOriginal;
 
 	@JsonProperty("amount")
-	private Double valorComJuros;
+	private BigDecimal valorComJuros;
 
 	@JsonProperty("due_date")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -22,30 +23,30 @@ public class ResumoCalculoJuros {
 	private LocalDate dataPagamento;
 
 	@JsonProperty("interest_amount_calculated")
-	private Double quantidadeJurosCalculada;
+	private BigDecimal quantidadeJurosCalculada;
 
 	@JsonProperty("fine_amount_calculated")
-	private Double quantidadeMultaCalculada;
+	private BigDecimal quantidadeMultaCalculada;
 
-	public ResumoCalculoJuros(Double valorOriginal, LocalDate dataVencimento, LocalDate dataPagamento) {
+	public ResumoCalculoJuros(BigDecimal valorOriginal, LocalDate dataVencimento, LocalDate dataPagamento) {
 		this.valorOriginal = valorOriginal;
 		this.dataVencimento = dataVencimento;
 		this.dataPagamento = dataPagamento;
 	}
 
-	public Double getValorOriginal() {
+	public BigDecimal getValorOriginal() {
 		return valorOriginal;
 	}
 
-	public void setValorOriginal(Double valorOriginal) {
+	public void setValorOriginal(BigDecimal valorOriginal) {
 		this.valorOriginal = valorOriginal;
 	}
 
-	public Double getValorComJuros() {
+	public BigDecimal getValorComJuros() {
 		return valorComJuros;
 	}
 
-	public void setValorComJuros(Double valor) {
+	public void setValorComJuros(BigDecimal valor) {
 		this.valorComJuros = valor;
 	}
 
@@ -65,19 +66,19 @@ public class ResumoCalculoJuros {
 		this.dataPagamento = dataPagamento;
 	}
 
-	public Double getQuantidadeJurosCalculada() {
+	public BigDecimal getQuantidadeJurosCalculada() {
 		return quantidadeJurosCalculada;
 	}
 
-	public void setQuantidadeJurosCalculada(Double quantidadeJurosCalculada) {
+	public void setQuantidadeJurosCalculada(BigDecimal quantidadeJurosCalculada) {
 		this.quantidadeJurosCalculada = quantidadeJurosCalculada;
 	}
 
-	public Double getQuantidadeMultaCalculada() {
+	public BigDecimal getQuantidadeMultaCalculada() {
 		return quantidadeMultaCalculada;
 	}
 
-	public void setQuantidadeMultaCalculada(Double quantidadeMultaCalculada) {
+	public void setQuantidadeMultaCalculada(BigDecimal quantidadeMultaCalculada) {
 		this.quantidadeMultaCalculada = quantidadeMultaCalculada;
 	}
 

@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -23,7 +24,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -42,13 +42,11 @@ import io.platformbuilders.challenge.domain.usecase.exception.BoletoNaoVencidoEx
 import io.platformbuilders.challenge.domain.usecase.exception.CodigoBoletoInvalidoException;
 import io.platformbuilders.challenge.domain.usecase.exception.InformacoesInsuficientesException;
 import io.platformbuilders.challenge.domain.usecase.exception.TipoBoletoDiferenteNpcException;
-import io.platformbuilders.challenge.infrastructure.WebAppContextTest;
 import io.platformbuilders.challenge.infrastructure.adapters.AdaptadorDeLocalDate;
 import io.platformbuilders.challenge.infrastructure.exception.AutenticacaoApiBuildersException;
 import io.platformbuilders.challenge.infrastructure.exception.ComunicacaoApiBuildersException;
 
 @WebAppConfiguration
-@EnableJpaRepositories
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = { WebAppContextTest.class })
 class CalculadoraDeJurosControllerTest {
@@ -61,16 +59,15 @@ class CalculadoraDeJurosControllerTest {
 	private static final String BOLETO_NAO_VENCIDO = "O código de boleto informado não pertence a um boleto vencido.";
 	private static final String FORMATO_INVALIDO = "Um ou mais campos informados estão em um formato inválido. Por favor, verifique a documentação e tente novamente.";
 	private static final String ERRO_INESPERADO = "Um erro inesperado ocorreu. Por favor, tente novamente. Se o erro persistir, entre em contato com nosso suporte.";
-	private static final String MENSAGEM_ERRO_GENERICA = "Exemplo de mensagem";
 
 	private static final String ERROR = "$.error_code";
 	private static final String DESCRIPTION = "$.description";
 	private static final String URI = "/api/v1/calculate-interests";
 
-	private static final Double MULTA_CALCULADA = 2d;
-	private static final Double JUROS_CALCULADO = 0.066;
-	private static final Double VALOR_ORIGINAL = 1200d;
-	private static final Double VALOR_JUROS = 1224.792;
+	private static final BigDecimal MULTA_CALCULADA = BigDecimal.valueOf(2d);
+	private static final BigDecimal JUROS_CALCULADO = BigDecimal.valueOf(0.066);
+	private static final BigDecimal VALOR_ORIGINAL = BigDecimal.valueOf(1200d);
+	private static final BigDecimal VALOR_JUROS = BigDecimal.valueOf(1224.792);
 
 	private static final LocalDate DATA_VENCIMENTO = LocalDate.of(2022, Month.DECEMBER, 23);
 	private static final LocalDate DATA_PAGAMENTO = LocalDate.of(2022, Month.DECEMBER, 25);
@@ -213,12 +210,12 @@ class CalculadoraDeJurosControllerTest {
 		ResultActions resultado = mockMvc.perform(post(URI).contentType(APPLICATION_JSON).content(pagamentoBoletoJson));
 
 		ResultActions entidadeNaoProcessavel = resultado.andExpect(status().isOk());
-		entidadeNaoProcessavel.andExpect(jsonPath("$.original_amount", Matchers.equalTo(VALOR_ORIGINAL)));
-		entidadeNaoProcessavel.andExpect(jsonPath("$.amount", Matchers.equalTo(VALOR_JUROS)));
+		entidadeNaoProcessavel.andExpect(jsonPath("$.original_amount", Matchers.equalTo(VALOR_ORIGINAL.doubleValue())));
+		entidadeNaoProcessavel.andExpect(jsonPath("$.amount", Matchers.equalTo(VALOR_JUROS.doubleValue())));
 		entidadeNaoProcessavel.andExpect(jsonPath("$.due_date", Matchers.equalTo(DATA_VENCIMENTO.toString())));
 		entidadeNaoProcessavel.andExpect(jsonPath("$.payment_date", Matchers.equalTo(DATA_PAGAMENTO.toString())));
-		entidadeNaoProcessavel.andExpect(jsonPath("$.interest_amount_calculated", Matchers.equalTo(JUROS_CALCULADO)));
-		entidadeNaoProcessavel.andExpect(jsonPath("$.fine_amount_calculated", Matchers.equalTo(MULTA_CALCULADA)));
+		entidadeNaoProcessavel.andExpect(jsonPath("$.interest_amount_calculated", Matchers.equalTo(JUROS_CALCULADO.doubleValue())));
+		entidadeNaoProcessavel.andExpect(jsonPath("$.fine_amount_calculated", Matchers.equalTo(MULTA_CALCULADA.doubleValue())));
 	}
 
 	private ResumoCalculoJuros mockCalculoJuros() {
