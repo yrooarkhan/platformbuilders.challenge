@@ -1,0 +1,98 @@
+swagger: "2.0"
+info:
+  description: "Documentação criada exclusivamente para o projeto **Platform Builders: Desafio Técnico**. \n
+    Esta documentação visa exemplificar o acesso às APIs desenvolvidas para a aplicação associada."
+  version: "1.0"
+  title: "Builders Pay"
+  contact:
+    name: "Felipe Luan Cipriani"
+    email: "felipe.cipriani@protonmail.com.br"
+host: "localhost:8080"
+basePath: "/api/v1"
+tags:
+- name: "Cálculo de Juros"
+  description: "Calcule o juros e multa de um boleto com base na data de pagamento."
+schemes:
+- "http"
+paths:
+  /calculate-interests:
+    post:
+      tags:
+      - "Cálculo de Juros"
+      summary: "Calcula o Juros com base na data do Pagamento"
+      operationId: "calculate-interests"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Pagamento do boleto"
+        required: true
+        schema:
+          $ref: "#/definitions/PagamentoBoleto"
+      responses:
+        200:
+          description: "Resumo do cálculo de juros"
+          schema:
+            $ref: "#/definitions/ResumoCalculoJuros"
+        400:
+          description: "A requisição está mal-formatada."
+          schema:
+            $ref: "#/definitions/FalhaProcessamento"
+        401:
+          description: "A aplicação Builders Pay não foi capaz de se autenticar na aplicação parceira de boletos bancários."
+          schema:
+            $ref: "#/definitions/FalhaProcessamento"
+        422:
+          description: "O código de boleto informado existe, porém ele não é válido para a aplicação de juros e multa."
+          schema:
+            $ref: "#/definitions/FalhaProcessamento"
+        503:
+          description: "O servidor da aplicação parceira de boletos bancários demorou muito para responder, ou encerrou a comunicação."
+          schema:
+            $ref: "#/definitions/FalhaProcessamento"
+definitions:
+  ResumoCalculoJuros:
+    type: "object"
+    properties:
+      original_amount:
+        type: "number"
+        description: "Valor o original do boleto."
+      amount:
+        type: "number"
+        description: "Valor o do boleto após juros e multa aplicados."
+      due_date:
+        type: "string"
+        format: "YYYY-MM-DD"
+        description: "Data de vencimento do boleto."
+      payment_date:
+        type: "string"
+        format: "YYYY-MM-DD"
+        description: "Data do pagamento do boleto."
+      interest_amount_calculated:
+        type: "number"
+        description: "Valor do juros calculada."
+      fine_amount_calculated:
+        type: "number"
+        description: "Valor da multa calculada."
+  PagamentoBoleto:
+    type: "object"
+    properties:
+      bar_code:
+        type: "string"
+        description: "Código de barras do boleto bancário."
+      payment_date:
+        format: "YYYY-MM-DD"
+        description: "Data do pagamento do boleto."
+  FalhaProcessamento:
+    type: "object"
+    properties:
+      error_code:
+        type: "integer"
+        format: "int32"
+        description: "Status HTTP do erro que ocorreu. Pode variar dependendo do problema"
+      description:
+        type: "string"
+        description: "Motivo do erro"

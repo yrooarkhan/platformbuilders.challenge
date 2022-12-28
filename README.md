@@ -1,12 +1,12 @@
 # Platform Builders: Desafio Técnico
 
-## Contexto
+## 1. Contexto
 
-O objetivo proposto era a criação de uma aplicação capaz de receber um código de boleto, que deveria ser consultado em aplicação os dados do mesmo, para que pudéssemos fazer os cálculos de juros, e retornássemos ao cliente.
+O objetivo proposto era a criação de uma aplicação capaz de receber um código de boleto bancário e data de pagamente, para que então calculássemos o valor do juros e devolvêssemos a informação ao usuário.
 
 Mais detalhes a respeito do desafio podem ser visto [aqui](https://platformbuilders.notion.site/Desafio-T-cnico-483464fe010e4122b88499f4b3d625d9).
 
-## Sobre o projeto
+## 2. Sobre o projeto
 
 O projeto em questão foi desenvolvido em **Java 18** (*18.0.2-open*), **Spring Boot** (*3.0.1*), e uma série de outras bibliotecas auxiliares conforme listadas abaixo.
 
@@ -21,7 +21,7 @@ O projeto em questão foi desenvolvido em **Java 18** (*18.0.2-open*), **Spring 
 | org.junit.jupiter | junit-jupiter-api | *Testes* |
 | org.apache.commons | commons-lang3 | *Testes* |
 
-### Banco de dados
+### 2.1. Banco de dados
 
 Como um dos requisitos do projeto era justamente a persistência dos cálculos em um banco de dados, me aproveitei das abstrações do **Hibernate** para utilizar um banco de dados em memória (**H2**), apenas a fim de demonstrações da prática.
 
@@ -33,13 +33,13 @@ A **URL** para acessar a interfáce gráfica do **H2** é: http://localhost:8080
 
 Uma vez na tela, basta recuperar as credenciais de acesso disponíveis no arquivo `src/main/resources/application.properties`, preencher os campos e acessar.
 
-### Sobre o Ambiente
+### 2.2. Sobre o Ambiente
 
-#### Requisitos mínimos
+#### 2.2.1. Requisitos mínimos
 - **Java** *18.0.2-open* e **Apache Maven** *3.8.6*
 - ... ou **Docker 20.10.22**
 
-#### Subindo com Docker
+#### 2.2.2. Subindo com Docker
 
 Se você possuir o Docker instalado, uma vez que você estiver na raíz do projeto, tudo o que precisa fazer é digitar o comando abaixo.
 
@@ -63,7 +63,7 @@ docker run --name {{nome-container}} --env CLIENT_ID={{client-id}} --env CLIENT_
 
 Feito isto, a aplicação já deve estar funcionando.
 
-#### Subindo com Java e Maven
+#### 2.2.3. Subindo com Java e Maven
 
 Uma vez que você estiver na raíz do projeto, digite o seguinte comando:
 
@@ -84,6 +84,6 @@ java -DclientId=$CLIENT_ID -DclientSecret=$CLIENT_SECRET -Dfile.encoding=UTF-8 -
 
 > A **chave** e **senha** da "API de Boletos" está disponível no primeiro link informado neste documento, onde há mais informações e detalhes sobre esta mesma aplicação.
 
-### Endpoints
+### 2.3. Endpoints
 
 Para entender melhor como funciona a aplicação e sua API, por favor, leia a documentação disponível em `src/main/resources/documentation.yaml`.
