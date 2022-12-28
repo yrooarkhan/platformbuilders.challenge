@@ -2,7 +2,7 @@
 
 ## 1. Contexto
 
-O objetivo proposto era a criação de uma aplicação capaz de receber um código de boleto bancário e data de pagamente, para que então calculássemos o valor do juros e devolvêssemos a informação ao usuário.
+O objetivo proposto era a criação de uma aplicação capaz de receber um código de boleto bancário e data de pagamento, para que então calculássemos o valor do juros e devolvêssemos a informação ao usuário.
 
 Mais detalhes a respeito do desafio podem ser visto [aqui](https://platformbuilders.notion.site/Desafio-T-cnico-483464fe010e4122b88499f4b3d625d9).
 
